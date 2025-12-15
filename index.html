@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Введите код The Ghost in the Code: A 2077 Story</title>
+  <style>
+    body {
+      background: #000;
+      color: #ccc;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 2.5rem;
+      letter-spacing: 4px;
+      color: #888;
+    }
+    .input-group {
+      margin-bottom: 1.5rem;
+    }
+    input {
+      background: transparent;
+      border: 1px solid #444;
+      color: white;
+      padding: 12px 20px;
+      font-size: 1.3rem;
+      letter-spacing: 3px;
+      text-align: center;
+      width: 180px;
+      outline: none;
+    }
+    input:focus {
+      border-color: #666;
+    }
+    button {
+      background: transparent;
+      border: 1px solid #555;
+      color: #aaa;
+      padding: 12px 32px;
+      font-family: 'Courier New', monospace;
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      cursor: not-allowed;
+      opacity: 0.5;
+      transition: all 0.3s;
+    }
+    button.active {
+      cursor: pointer;
+      opacity: 1;
+      border-color: #888;
+      color: #fff;
+    }
+    button.active:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: #bbb;
+    }
+
+    .hint {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #bbb;
+      max-width: 400px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .copyright {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: #666;
+      max-width: 400px;
+      line-height: 1.5;
+      text-align: center;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+  <h1>ТРЕБУЕТСЯ КОД ДОСТУПА</h1>
+  
+  <div class="input-group">
+    <input 
+      type="text" 
+      id="codeInput" 
+      maxlength="10" 
+      placeholder="КОД" 
+      autocomplete="off"
+      autofocus
+    >
+  </div>
+
+  <button id="enterBtn" disabled>
+    → ВХОД
+  </button>
+
+  <!-- Подсказка для новых пользователей -->
+  <div class="hint">
+    Если у Вас нет кода обратитесь к автору  <strong>rulezboy@mail.ru</strong>
+  </div>
+
+  <!-- Авторские права -->
+  <div class="copyright">
+    Все права защищены.<br>
+    Запрещено несанкционированное копирование и коммерческое использование.
+  </div>
+
+  <script>
+    // Соответствие кодов и URL (все URL остаются на английском)
+    const accessMap = {
+      '0371': '2077.html',
+      '5438': 'choices.html',
+      'PART1': 'part1.html',
+      'ARTM': 'https://example.com/secret-artem', // заменено на Artem
+      'STAR': 'https://example.com/star-room'
+    };
+
+    const input = document.getElementById('codeInput');
+    const button = document.getElementById('enterBtn');
+
+    input.addEventListener('input', () => {
+      const val = input.value.trim().toUpperCase();
+      if (accessMap[val]) {
+        button.classList.add('active');
+        button.disabled = false;
+      } else {
+        button.classList.remove('active');
+        button.disabled = true;
+      }
+    });
+
+    button.addEventListener('click', () => {
+      const val = input.value.trim().toUpperCase();
+      const targetUrl = accessMap[val];
+      if (targetUrl) {
+        window.location.href = targetUrl;
+      }
+    });
+
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const val = input.value.trim().toUpperCase();
+        const targetUrl = accessMap[val];
+        if (targetUrl) {
+          window.location.href = targetUrl;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

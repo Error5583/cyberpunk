@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ACCESS GATE</title>
+<meta name="description" content="The Ghost in the Code 2077" />
+  <style>
+    body {
+      background: #000;
+      color: #ccc;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 2.5rem;
+      letter-spacing: 4px;
+      color: #888;
+    }
+    .input-group {
+      margin-bottom: 1.5rem;
+    }
+    input {
+      background: transparent;
+      border: 1px solid #444;
+      color: white;
+      padding: 12px 20px;
+      font-size: 1.3rem;
+      letter-spacing: 3px;
+      text-align: center;
+      width: 180px;
+      outline: none;
+    }
+    input:focus {
+      border-color: #666;
+    }
+    button {
+      background: transparent;
+      border: 1px solid #555;
+      color: #aaa;
+      padding: 12px 32px;
+      font-family: 'Courier New', monospace;
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      cursor: not-allowed;
+      opacity: 0.5;
+      transition: all 0.3s;
+    }
+    button.active {
+      cursor: pointer;
+      opacity: 1;
+      border-color: #888;
+      color: #fff;
+    }
+    button.active:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: #bbb;
+    }
+  </style>
+</head>
+<body>
+  <h1>ACCESS CODE REQUIRED</h1>
+  
+  <div class="input-group">
+    <input 
+      type="text" 
+      id="codeInput" 
+      maxlength="4" 
+      placeholder="CODE" 
+      autocomplete="off"
+      autofocus
+    >
+  </div>
+
+  <button id="enterBtn" disabled>
+    → ENTER
+  </button>
+
+  <script>
+    // Здесь задаём соответствие кодов и URL
+    const accessMap = {
+      '2077': '2077.html',
+      '5583': 'choices.html',
+      'ALIN': 'https://example.com/secret-alina',
+      'STAR': 'https://example.com/star-room'
+      // добавляйте сколько угодно пар
+    };
+
+    const input = document.getElementById('codeInput');
+    const button = document.getElementById('enterBtn');
+
+    input.addEventListener('input', () => {
+      const val = input.value.trim().toUpperCase(); // приводим к одному регистру для удобства
+      if (accessMap[val]) {
+        button.classList.add('active');
+        button.disabled = false;
+      } else {
+        button.classList.remove('active');
+        button.disabled = true;
+      }
+    });
+
+    button.addEventListener('click', () => {
+      const val = input.value.trim().toUpperCase();
+      const targetUrl = accessMap[val];
+      if (targetUrl) {
+        window.location.href = targetUrl;
+      }
+    });
+
+    // Поддержка Enter
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const val = input.value.trim().toUpperCase();
+        const targetUrl = accessMap[val];
+        if (targetUrl) {
+          window.location.href = targetUrl;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

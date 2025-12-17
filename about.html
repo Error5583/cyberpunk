@@ -76,11 +76,11 @@
     m[i].l=1*new Date();
     for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
     k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-  })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105814767           ', 'ym');
+  })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105814767             ', 'ym');
 
   ym(105814767, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/105814767           " style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript><div><img src="https://mc.yandex.ru/watch/105814767             " style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
 <h1>Ядро системы Свободное дыхание</h1>
@@ -160,6 +160,15 @@ FreeBreath.exe работает на донат-питании.<br>
       </button>
     </p>
 
+    <!-- Телефон -->
+    <p>
+      <strong>Оплата по телефону Tinkf-Sber-Raif ☎️</strong><br>
+      <code id="phone" style="color: #aaa; background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 3px; user-select: all;">79062484193</code><br>
+      <button id="copyPhoneBtn" class="support-btn" style="width: auto; margin-top: 6px; font-size: 0.95rem; padding: 6px 16px;">
+        → Скопировать номер телефона
+      </button>
+    </p>
+
     <!-- Имя автора -->
     <p>
       <strong>Имя автора 🖋️</strong><br>
@@ -171,7 +180,7 @@ FreeBreath.exe работает на донат-питании.<br>
 
     <!-- Telegram -->
     <p>
-      <a href="https://t.me/+TxEPTmSTE4k3ZWJi" target="_blank" class="support-btn" style="width: auto; margin-top: 12px;">
+      <a href="https://t.me/cyberpunkstrory" target="_blank" class="support-btn" style="width: auto; margin-top: 12px;">
         → Подписаться на канал
       </a>
     </p>
@@ -208,6 +217,20 @@ FreeBreath.exe работает на донат-питании.<br>
       document.getElementById('copyCardBtn').innerText = '✓ Скопировано!';
       setTimeout(() => {
         document.getElementById('copyCardBtn').innerText = '→ Скопировать номер карты';
+      }, 2000);
+    } catch (err) {
+      alert('Не удалось скопировать. Выделите и скопируйте вручную.');
+    }
+  });
+
+  // Копирование номера телефона
+  document.getElementById('copyPhoneBtn').addEventListener('click', async () => {
+    const phone = document.getElementById('phone').innerText;
+    try {
+      await navigator.clipboard.writeText(phone);
+      document.getElementById('copyPhoneBtn').innerText = '✓ Скопировано!';
+      setTimeout(() => {
+        document.getElementById('copyPhoneBtn').innerText = '→ Скопировать номер телефона';
       }, 2000);
     } catch (err) {
       alert('Не удалось скопировать. Выделите и скопируйте вручную.');

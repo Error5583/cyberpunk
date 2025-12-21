@@ -14,7 +14,10 @@
       padding: 2rem;
       text-align: center;
     }
-    h1 {
+
+    /* Глитч-заголовок */
+    h1.glitch-title {
+      position: relative;
       font-weight: 300;
       font-size: 2.4rem;
       margin: 1.5rem 0 0.5rem;
@@ -24,6 +27,46 @@
       color: transparent;
       text-align: left;
     }
+
+    h1.glitch-title::before,
+    h1.glitch-title::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(90deg, #c9a36b, #e8d7b5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    h1.glitch-title::before {
+      left: 2px;
+      text-shadow: -2px 0 #ff00c1;
+      clip: rect(0, 9999px, 0, 0);
+      animation: glitch-anim 5s infinite linear alternate-reverse;
+    }
+
+    h1.glitch-title::after {
+      left: -2px;
+      text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+      clip: rect(0, 9999px, 0, 0);
+      animation: glitch-anim2 4s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim {
+      0%, 19.999%, 22%, 69.999%, 72%, 100% { clip: rect(0, 9999px, 0, 0); }
+      20%, 21.999% { clip: rect(42px, 9999px, 54px, 0); }
+      70%, 71.999% { clip: rect(12px, 9999px, 78px, 0); }
+    }
+
+    @keyframes glitch-anim2 {
+      0%, 19.999%, 22%, 69.999%, 72%, 100% { clip: rect(0, 9999px, 0, 0); }
+      20%, 21.999% { clip: rect(32px, 9999px, 68px, 0); }
+      70%, 71.999% { clip: rect(22px, 9999px, 48px, 0); }
+    }
+
     img {
       width: 100%;
       border-radius: 8px;
@@ -34,13 +77,53 @@
       text-align: left;
       margin-top: 2rem;
     }
+
+    /* Глитч на нижней ссылке */
     a.back {
       display: inline-block;
       margin-top: 2rem;
       color: #777;
       text-decoration: none;
       font-family: 'Courier New', monospace;
+      position: relative;
     }
+
+    a.back::before,
+    a.back::after {
+      content: '← Вернуться к выбору';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      white-space: nowrap;
+    }
+
+    a.back::before {
+      color: #ff00c1;
+      left: 2px;
+      opacity: 0;
+      animation: glitch-link-1 3s infinite;
+    }
+
+    a.back::after {
+      color: #00fff9;
+      left: -2px;
+      opacity: 0;
+      animation: glitch-link-2 2.7s infinite;
+    }
+
+    @keyframes glitch-link-1 {
+      0%, 19%, 21%, 69%, 71%, 100% { opacity: 0; transform: translateX(0); }
+      20% { opacity: 1; transform: translateX(-2px); }
+      70% { opacity: 1; transform: translateX(2px); }
+    }
+
+    @keyframes glitch-link-2 {
+      0%, 19%, 21%, 69%, 71%, 100% { opacity: 0; transform: translateX(0); }
+      20% { opacity: 0.9; transform: translateX(2px); }
+      70% { opacity: 0.9; transform: translateX(-2px); }
+    }
+
     a.back:hover {
       color: #aaa;
     }
@@ -54,14 +137,17 @@
         m[i].l=1*new Date();
         for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
         k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105914687', 'ym');
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105914687  ', 'ym');
 
     ym(105914687, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/105914687" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript><div><img src="https://mc.yandex.ru/watch/105914687  " style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
-  <h1>Она никогда не умирала. Это был план</h1>
+  <!-- Заголовок с глитчем -->
+  <h1 class="glitch-title" data-text="Она никогда не умирала. Это был план">
+    Она никогда не умирала. Это был план
+  </h1>
   
   <img src="finale-3.png" alt="Артем — NUIT">
 
@@ -85,6 +171,9 @@
   (Ваша версия — демо.)</span>
 </div>
 
-  <a href="choices.html" class="back">← Вернуться к выбору</a>
+  <!-- Ссылка с глитчем -->
+  <a href="choices.html" class="back">
+    ← Вернуться к выбору
+  </a>
 </body>
 </html>

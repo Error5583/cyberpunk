@@ -15,7 +15,10 @@
       text-align: left;
       line-height: 1.7;
     }
-    h1 {
+
+    /* Глитч-заголовок */
+    h1.glitch-title {
+      position: relative;
       font-weight: 300;
       font-size: 2.4rem;
       margin: 1.5rem 0 0.5rem;
@@ -25,6 +28,46 @@
       color: transparent;
       text-align: left;
     }
+
+    h1.glitch-title::before,
+    h1.glitch-title::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(90deg, #c9a36b, #e8d7b5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    h1.glitch-title::before {
+      left: 2px;
+      text-shadow: -2px 0 #ff00c1;
+      clip: rect(0, 9999px, 0, 0);
+      animation: glitch-anim 5s infinite linear alternate-reverse;
+    }
+
+    h1.glitch-title::after {
+      left: -2px;
+      text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+      clip: rect(0, 9999px, 0, 0);
+      animation: glitch-anim2 4s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim {
+      0%, 19.999%, 22%, 69.999%, 72%, 100% { clip: rect(0, 9999px, 0, 0); }
+      20%, 21.999% { clip: rect(42px, 9999px, 54px, 0); }
+      70%, 71.999% { clip: rect(12px, 9999px, 78px, 0); }
+    }
+
+    @keyframes glitch-anim2 {
+      0%, 19.999%, 22%, 69.999%, 72%, 100% { clip: rect(0, 9999px, 0, 0); }
+      20%, 21.999% { clip: rect(32px, 9999px, 68px, 0); }
+      70%, 71.999% { clip: rect(22px, 9999px, 48px, 0); }
+    }
+
     img {
       width: 100%;
       border-radius: 8px;
@@ -34,6 +77,8 @@
     p {
       margin-bottom: 1.2rem;
     }
+
+    /* Глитч на кнопке */
     .enter-code {
       display: block;
       width: fit-content;
@@ -46,10 +91,95 @@
       font-family: 'Courier New', monospace;
       letter-spacing: 1px;
       transition: all 0.3s;
+      position: relative;
     }
+
+    .enter-code::before,
+    .enter-code::after {
+      content: '→ Введите код';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 12px 32px;
+      box-sizing: border-box;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 1px;
+    }
+
+    .enter-code::before {
+      color: #ff00c1;
+      left: 2px;
+      opacity: 0;
+      animation: glitch-btn-1 3s infinite;
+    }
+
+    .enter-code::after {
+      color: #00fff9;
+      left: -2px;
+      opacity: 0;
+      animation: glitch-btn-2 2.7s infinite;
+    }
+
+    @keyframes glitch-btn-1 {
+      0%, 19%, 21%, 69%, 71%, 100% { opacity: 0; transform: translateX(0); }
+      20% { opacity: 1; transform: translateX(-2px); }
+      70% { opacity: 1; transform: translateX(2px); }
+    }
+
+    @keyframes glitch-btn-2 {
+      0%, 19%, 21%, 69%, 71%, 100% { opacity: 0; transform: translateX(0); }
+      20% { opacity: 0.9; transform: translateX(2px); }
+      70% { opacity: 0.9; transform: translateX(-2px); }
+    }
+
     .enter-code:hover {
       border-color: #FFD700;
       color: #FFD700;
+    }
+
+    /* Глитч на "КОД: 5438" */
+    .glitch-code {
+      display: inline-block;
+      position: relative;
+      color: #FFD700;
+      font-weight: bold;
+    }
+
+    .glitch-code::before,
+    .glitch-code::after {
+      content: 'КОД: 5438';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .glitch-code::before {
+      color: #ff00c1;
+      left: 1px;
+      opacity: 0;
+      animation: glitch-code-1 2.8s infinite;
+    }
+
+    .glitch-code::after {
+      color: #00fff9;
+      left: -1px;
+      opacity: 0;
+      animation: glitch-code-2 3.1s infinite;
+    }
+
+    @keyframes glitch-code-1 {
+      0%, 19%, 21%, 69%, 71%, 100% { opacity: 0; }
+      20% { opacity: 1; clip: rect(2px, 9999px, 14px, 0); }
+      70% { opacity: 1; clip: rect(6px, 9999px, 18px, 0); }
+    }
+
+    @keyframes glitch-code-2 {
+      0%, 19%, 21%, 69%, 71%, 100% { opacity: 0; }
+      20% { opacity: 0.85; clip: rect(4px, 9999px, 16px, 0); }
+      70% { opacity: 0.85; clip: rect(8px, 9999px, 20px, 0); }
     }
   </style>
 </head>
@@ -61,14 +191,17 @@
         m[i].l=1*new Date();
         for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
         k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105914687', 'ym');
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105914687  ', 'ym');
 
     ym(105914687, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/105914687" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript><div><img src="https://mc.yandex.ru/watch/105914687  " style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
-  <h1>Призрак в коде: История 2077 — Часть II</h1>
+  <!-- Заголовок с глитчем -->
+  <h1 class="glitch-title" data-text="Призрак в коде: История 2077 — Часть II">
+    Призрак в коде: История 2077 — Часть II
+  </h1>
   <!-- Картинка с основного сайта -->
   <img src="part2.jpg" alt="Артем — NUIT">
 
@@ -262,11 +395,12 @@
     «Лео! Нажми кнопку! Введи КОД!»
   </p>
 
+  <!-- КОД с глитчем -->
   <p>
-    <strong>КОД: 5438</strong>
+    <strong class="glitch-code">КОД: 5438</strong>
   </p>
 
-  <!-- Кнопка: ввести код → главная страница -->
+  <!-- Кнопка с глитчем -->
   <a href="index.html" class="enter-code">
     → Введите код
   </a>

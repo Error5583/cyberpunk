@@ -14,7 +14,10 @@
       padding: 2rem;
       text-align: center;
     }
-    h1 {
+
+    /* Глитч-заголовок (только первый) */
+    h1.main-title {
+      position: relative;
       font-weight: 300;
       font-size: 2.4rem;
       margin: 1.5rem 0 0.5rem;
@@ -24,6 +27,58 @@
       color: transparent;
       text-align: left;
     }
+
+    h1.main-title::before,
+    h1.main-title::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(90deg, #c9a36b, #e8d7b5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    h1.main-title::before {
+      left: 2px;
+      text-shadow: -2px 0 #ff00c1;
+      clip: rect(0, 9999px, 0, 0);
+      animation: glitch-anim 5s infinite linear alternate-reverse;
+    }
+
+    h1.main-title::after {
+      left: -2px;
+      text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+      clip: rect(0, 9999px, 0, 0);
+      animation: glitch-anim2 4s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim {
+      0%, 19.999%, 22%, 69.999%, 72%, 100% { clip: rect(0, 9999px, 0, 0); }
+      20%, 21.999% { clip: rect(42px, 9999px, 54px, 0); }
+      70%, 71.999% { clip: rect(12px, 9999px, 78px, 0); }
+    }
+
+    @keyframes glitch-anim2 {
+      0%, 19.999%, 22%, 69.999%, 72%, 100% { clip: rect(0, 9999px, 0, 0); }
+      20%, 21.999% { clip: rect(32px, 9999px, 68px, 0); }
+      70%, 71.999% { clip: rect(22px, 9999px, 48px, 0); }
+    }
+
+    /* Статичный заголовок под картинкой — тот же цвет, но без глитча */
+    h1.static-title {
+      font-weight: 300;
+      font-size: 2.4rem;
+      margin: 1.5rem 0 0.5rem;
+      background: linear-gradient(90deg, #c9a36b, #e8d7b5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-align: left;
+    }
+
     img {
       width: 100%;
       border-radius: 8px;
@@ -65,6 +120,52 @@
       background: rgba(255,255,255,0.03);
     }
 
+    /* Глитч на нижней кнопке */
+    .alt-ending {
+      position: relative;
+    }
+
+    .alt-ending::before,
+    .alt-ending::after {
+      content: '→ Ошибка 404: Кнопка не должна существовать. Ты не готов. Но всё равно нажми →';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 14px;
+      box-sizing: border-box;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    .alt-ending::before {
+      color: #ff00c1;
+      left: 2px;
+      opacity: 0;
+      animation: glitch-btn-1 3s infinite;
+    }
+
+    .alt-ending::after {
+      color: #00fff9;
+      left: -2px;
+      opacity: 0;
+      animation: glitch-btn-2 2.7s infinite;
+    }
+
+    @keyframes glitch-btn-1 {
+      0%, 19%, 21%, 69%, 71%, 100% { opacity: 0; transform: translateX(0); }
+      20% { opacity: 1; transform: translateX(-2px); }
+      70% { opacity: 1; transform: translateX(2px); }
+    }
+
+    @keyframes glitch-btn-2 {
+      0%, 19%, 21%, 69%, 71%, 100% { opacity: 0; transform: translateX(0); }
+      20% { opacity: 0.9; transform: translateX(2px); }
+      70% { opacity: 0.9; transform: translateX(-2px); }
+    }
+
     .magic-link {
       display: inline-block;
       padding: 14px 32px;
@@ -103,18 +204,23 @@
         m[i].l=1*new Date();
         for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
         k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105914687', 'ym');
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105914687  ', 'ym');
 
     ym(105914687, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/105914687" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript><div><img src="https://mc.yandex.ru/watch/105914687  " style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
-<h1>Призрак в коде: История 2077 — Финальный выбор</h1>
+<!-- Верхний заголовок — с глитчем -->
+<h1 class="main-title" data-text="Призрак в коде: История 2077 — Финальный выбор">
+  Призрак в коде: История 2077 — Финальный выбор
+</h1>
 
 <img src="choices.png" alt="Артем — NUIT">
 
-<h1>Выбери свою правду:</h1>
+<!-- Заголовок под картинкой — без глитча, но того же цвета -->
+<h1 class="static-title">Выбери свою правду:</h1>
+
 <div class="choices">
   <a href="finale-1.html">Она свободна. Я отпустил её.</a>
   <a href="finale-2.html">Она всё ещё в ловушке. Я должен последовать за ней.</a>
@@ -143,6 +249,7 @@
   </span>
 </div>
 
+<!-- Нижняя кнопка — с глитчем -->
 <a href="about.html" class="alt-ending">
   → Ошибка 404: Кнопка не должна существовать. Ты не готов. Но всё равно нажми →
 </a>

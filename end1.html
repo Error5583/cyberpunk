@@ -15,15 +15,62 @@
       text-align: left;
       line-height: 1.6;
     }
-    h1 {
+
+    /* Общий стиль заголовков — градиент */
+    .title-gradient {
+      background: linear-gradient(90deg, #c9a36b, #e8d7b5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
       font-weight: 300;
       font-size: 2rem;
       margin: 1.5rem 0 1.2rem;
+    }
+
+    /* Верхний заголовок — с глитчем */
+    h1.glitch-title {
+      position: relative;
+    }
+
+    h1.glitch-title::before,
+    h1.glitch-title::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
       background: linear-gradient(90deg, #c9a36b, #e8d7b5);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
+
+    h1.glitch-title::before {
+      left: 2px;
+      text-shadow: -2px 0 #ff00c1;
+      clip: rect(0, 9999px, 0, 0);
+      animation: glitch-anim 5s infinite linear alternate-reverse;
+    }
+
+    h1.glitch-title::after {
+      left: -2px;
+      text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+      clip: rect(0, 9999px, 0, 0);
+      animation: glitch-anim2 4s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim {
+      0%, 19.999%, 22%, 69.999%, 72%, 100% { clip: rect(0, 9999px, 0, 0); }
+      20%, 21.999% { clip: rect(42px, 9999px, 54px, 0); }
+      70%, 71.999% { clip: rect(12px, 9999px, 78px, 0); }
+    }
+
+    @keyframes glitch-anim2 {
+      0%, 19.999%, 22%, 69.999%, 72%, 100% { clip: rect(0, 9999px, 0, 0); }
+      20%, 21.999% { clip: rect(32px, 9999px, 68px, 0); }
+      70%, 71.999% { clip: rect(22px, 9999px, 48px, 0); }
+    }
+
     img {
       width: 100%;
       border-radius: 8px;
@@ -59,10 +106,12 @@
       color: white;
       background: rgba(255,255,255,0.03);
     }
+
+    /* ✅ ГЛИТЧ НА КНОПКЕ ЗАВЕРШЕНИЯ */
     .final-message {
       display: inline-block;
       margin-top: 2.5rem;
-      color: #777;
+      color: #ccc;
       background: transparent;
       border: 1px solid #444;
       font-family: 'Courier New', monospace;
@@ -73,10 +122,53 @@
       transition: all 0.3s;
       outline: none;
       user-select: none;
+      position: relative;
     }
+
+    .final-message::before,
+    .final-message::after {
+      content: '→ Нереальность принята. Спасибо, что были здесь.';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 12px 32px;
+      box-sizing: border-box;
+      font-family: 'Courier New', monospace;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+
+    .final-message::before {
+      color: #ff00c1;
+      left: 2px;
+      opacity: 0;
+      animation: glitch-btn-1 3s infinite;
+    }
+
+    .final-message::after {
+      color: #00fff9;
+      left: -2px;
+      opacity: 0;
+      animation: glitch-btn-2 2.7s infinite;
+    }
+
+    @keyframes glitch-btn-1 {
+      0%, 19%, 21%, 69%, 71%, 100% { opacity: 0; transform: translateX(0); }
+      20% { opacity: 1; transform: translateX(-2px); }
+      70% { opacity: 1; transform: translateX(2px); }
+    }
+
+    @keyframes glitch-btn-2 {
+      0%, 19%, 21%, 69%, 71%, 100% { opacity: 0; transform: translateX(0); }
+      20% { opacity: 0.9; transform: translateX(2px); }
+      70% { opacity: 0.9; transform: translateX(-2px); }
+    }
+
     .final-message:hover {
       border-color: #888;
-      color: #ccc;
+      color: #fff;
       background: rgba(255,255,255,0.03);
     }
   </style>
@@ -90,17 +182,22 @@
         m[i].l=1*new Date();
         for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
         k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=105914687', 'ym');
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=105914687  ', 'ym');
 
     ym(105914687, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/105914687" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript><div><img src="https://mc.yandex.ru/watch/105914687  " style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
-<h1>Нереальность подтверждена</h1>
+<!-- Верхний заголовок — с глитчем -->
+<h1 class="glitch-title title-gradient" data-text="Нереальность подтверждена">
+  Нереальность подтверждена
+</h1>
 
 <img src="end1.png" alt="Наблюдатели Xy’lthor-7 в VR-шлемах">
-<h1>В мире скриптов ты выбрал чувствовать.  
+
+<!-- Второй заголовок — без глитча, но тем же цветом -->
+<h1 class="title-gradient">В мире скриптов ты выбрал чувствовать.  
 Это единственное чудо, которое допускает эта вселенная.</h1>
 
 <div class="text">
@@ -143,7 +240,7 @@ P.S. Если вдруг исчезнешь внезапно — не переж
 Ее-Монеты — в кошелёк автора. 😉
 </div>
 
-<!-- Блок поддержки -->
+<!-- Блок поддержки (без удаления — по вашему ТЕКУЩЕМУ запросу) -->
 <div class="support-section">
   <p style="color: #999; font-size: 0.95rem;">
    Я уже использовал все намеки что мог, ну почти все ;)
@@ -160,7 +257,7 @@ P.S. Если вдруг исчезнешь внезапно — не переж
 
   <!-- Банковская карта -->
   <p>
-    <strong>Банковская карта 💳</strong><br>
+    <strong>Банковская карта 💳 Тинькф</strong><br>
     <code id="card" style="color: #aaa; background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 3px; user-select: all;">5536913975537651</code><br>
     <button id="copyCardBtn" class="support-btn" style="width: auto; margin-top: 6px; font-size: 0.95rem; padding: 6px 16px;">
       → Скопировать номер карты
@@ -169,7 +266,7 @@ P.S. Если вдруг исчезнешь внезапно — не переж
 
   <!-- Телефон -->
   <p>
-    <strong>Оплата по телефону ☎️</strong><br>
+    <strong>Оплата по телефону ☎️ Сбер - Тинькф - Райф </strong><br>
     <code id="phone" style="color: #aaa; background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 3px; user-select: all;">79062484193</code><br>
     <button id="copyPhoneBtn" class="support-btn" style="width: auto; margin-top: 6px; font-size: 0.95rem; padding: 6px 16px;">
       → Скопировать номер телефона
@@ -187,7 +284,7 @@ P.S. Если вдруг исчезнешь внезапно — не переж
 
   <!-- Telegram -->
   <p>
-    <a href="https://t.me/cyberpunk_error" target="_blank" class="support-btn" style="width: auto; margin-top: 12px; text-decoration: none;">
+    <a href="https://t.me/cyberpunk_error  " target="_blank" class="support-btn" style="width: auto; margin-top: 12px; text-decoration: none;">
       → Подписаться на канал
     </a>
   </p>
@@ -196,13 +293,13 @@ P.S. Если вдруг исчезнешь внезапно — не переж
   </p>
 </div>
 
-<!-- Интерактивная "кнопка завершения" -->
+<!-- Интерактивная "кнопка завершения" — с глитчем -->
 <button class="final-message" id="fakeExitBtn">
   → Нереальность принята. Спасибо, что были здесь.
 </button>
 <br><br><br>
-<script>
 
+<script>
   // Функция копирования
   function setupCopyButton(btnId, fieldId) {
     document.getElementById(btnId).addEventListener('click', async () => {
@@ -224,7 +321,7 @@ P.S. Если вдруг исчезнешь внезапно — не переж
   setupCopyButton('copyPhoneBtn', 'phone');
   setupCopyButton('copyAuthorBtn', 'authorName');
 
-  // Интерактивная кнопка "завершения"
+  // Интерактивная кнопка "завершения" — hover-текст остаётся
   const btn = document.getElementById('fakeExitBtn');
   const originalText = btn.innerText;
   const hoverText = "«Ты уже прошёл игру. Больше кнопок не будет. (Но спасибо, что нажал.)И вообще ты хотел задонатить или да»";
@@ -237,7 +334,6 @@ P.S. Если вдруг исчезнешь внезапно — не переж
     btn.innerText = originalText;
   });
 
-  // Для мобильных (касание)
   btn.addEventListener('touchstart', (e) => {
     e.preventDefault();
     btn.innerText = hoverText;

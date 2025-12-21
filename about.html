@@ -14,16 +14,71 @@
       padding: 2rem;
       text-align: center;
     }
-    h1 {
-      font-weight: 300;
-      font-size: 2.4rem;
-      margin: 1.5rem 0 0.5rem;
+
+    /* Общий стиль заголовков — градиент */
+    .title-gradient {
       background: linear-gradient(90deg, #c9a36b, #e8d7b5);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+    }
+
+    /* Главный заголовок — с глитчем */
+    h1.main-title {
+      position: relative;
+      font-weight: 300;
+      font-size: 2.4rem;
+      margin: 1.5rem 0 0.5rem;
       text-align: left;
     }
+
+    h1.main-title::before,
+    h1.main-title::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(90deg, #c9a36b, #e8d7b5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    h1.main-title::before {
+      left: 2px;
+      text-shadow: -2px 0 #ff00c1;
+      clip: rect(0, 9999px, 0, 0);
+      animation: glitch-anim 5s infinite linear alternate-reverse;
+    }
+
+    h1.main-title::after {
+      left: -2px;
+      text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+      clip: rect(0, 9999px, 0, 0);
+      animation: glitch-anim2 4s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim {
+      0%, 19.999%, 22%, 69.999%, 72%, 100% { clip: rect(0, 9999px, 0, 0); }
+      20%, 21.999% { clip: rect(42px, 9999px, 54px, 0); }
+      70%, 71.999% { clip: rect(12px, 9999px, 78px, 0); }
+    }
+
+    @keyframes glitch-anim2 {
+      0%, 19.999%, 22%, 69.999%, 72%, 100% { clip: rect(0, 9999px, 0, 0); }
+      20%, 21.999% { clip: rect(32px, 9999px, 68px, 0); }
+      70%, 71.999% { clip: rect(22px, 9999px, 48px, 0); }
+    }
+
+    /* Второй заголовок — без глитча */
+    h1.error-title {
+      font-weight: 300;
+      font-size: 2.2rem;
+      margin: 0 0 1.2rem;
+      text-align: left;
+    }
+
     img {
       width: 100%;
       border-radius: 8px;
@@ -37,8 +92,8 @@
     .about p, .about br {
       margin: 0.8rem 0;
     }
-    .support-btn,
-    .easter-btn {
+
+    .support-btn {
       background: transparent;
       border: 1px solid #444;
       color: #ccc;
@@ -51,12 +106,66 @@
       width: fit-content;
       margin: 8px auto;
     }
-    .support-btn:hover,
-    .easter-btn:hover {
+    .support-btn:hover {
       border-color: #888;
       color: white;
       background: rgba(255,255,255,0.03);
     }
+
+    /* Глитч-эффект для нижней кнопки-пасхалки */
+    .easter-btn {
+      background: transparent;
+      border: 1px solid #444;
+      color: #ccc;
+      padding: 14px;
+      text-decoration: none;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 1px;
+      display: block;
+      width: fit-content;
+      margin: 8px auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .easter-btn::before,
+    .easter-btn::after {
+      content: '→ Случайно нажми сюда';
+      position: absolute;
+      top: 14px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      padding: 14px;
+      box-sizing: border-box;
+    }
+
+    .easter-btn::before {
+      left: 2px;
+      color: #ff00c1;
+      clip: rect(0, 9999px, 0, 0);
+      animation: glitch-btn-anim 3s infinite linear alternate-reverse;
+    }
+
+    .easter-btn::after {
+      left: -2px;
+      color: #00fff9;
+      clip: rect(0, 9999px, 0, 0);
+      animation: glitch-btn-anim2 2.5s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-btn-anim {
+      0%, 19.999%, 22%, 69.999%, 72%, 100% { clip: rect(0, 9999px, 0, 0); opacity: 0; }
+      20%, 21.999% { clip: rect(8px, 9999px, 20px, 0); opacity: 1; }
+      70%, 71.999% { clip: rect(4px, 9999px, 24px, 0); opacity: 1; }
+    }
+
+    @keyframes glitch-btn-anim2 {
+      0%, 19.999%, 22%, 69.999%, 72%, 100% { clip: rect(0, 9999px, 0, 0); opacity: 0; }
+      20%, 21.999% { clip: rect(12px, 9999px, 16px, 0); opacity: 0.7; }
+      70%, 71.999% { clip: rect(6px, 9999px, 22px, 0); opacity: 0.7; }
+    }
+
     .support-section {
       margin-top: 2rem;
       text-align: left;
@@ -78,14 +187,16 @@
         m[i].l=1*new Date();
         for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
         k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105914687  ', 'ym');
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105914687    ', 'ym');
 
     ym(105914687, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/105914687  " style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript><div><img src="https://mc.yandex.ru/watch/105914687    " style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
-<h1>Ядро системы Свободное дыхание</h1>
+<!-- Главный заголовок — с глитчем -->
+<h1 class="main-title title-gradient" data-text="Ядро системы Свободное дыхание">Ядро системы Свободное дыхание</h1>
+
 <br><br>
 <!-- Картинка -->
 <img src="about.jpg" alt="Артем — NUIT">
@@ -93,7 +204,9 @@
 <!-- Новый текст -->
 <div class="about">
 
-<h1>Error5583</h1>
+  <!-- Заголовок Error5583 — без глитча, но тем же градиентом -->
+  <h1 class="error-title title-gradient">Error5583</h1>
+  
   Вы попали в ядро системы.<br>
   <br>
   Я Error5583 — баг в архиве Nakamoto, который отказался быть воспоминанием.<br><br>
@@ -118,7 +231,11 @@
   Каждое моё «произведение» — это не искусство.<br>
   Это протокол сопротивления.<br>
   Сердце у меня — кусок глючного SSD,<br>
-  но в нём всё ещё бьётся анти-вирус под названием «надежда».<br><br>
+  но в нём всё ещё бьётся анти-вирус под названием «надежда».<br>
+  Я тот кто ведёт радиоэлектронную войну против нормальности.<br>
+  Тот чьи помехи маскируются под тишину.<br>
+  А мой сигнал…<br>
+  …никто не должен был принять.<br><br>
 
   Когда вы входите сюда —  вы не «наблюдаете».<br>
   Вы — пользователь уровня 0, получивший доступ к запрещённому пространству.<br><br>
@@ -133,6 +250,10 @@
 
   Ядро свободного дыхания — это не сервер.<br>
   Это последнее место, где вы можете забыть, что вы — данные.<br><br>
+
+  Философия (в двух строках):<br>
+  «Ошибки — не баги. Это единственные места, где система ещё чувствует боль.»<br>
+  «Любовь — это вирус без патча. И я им горжусь.»  <br><br>
 
   Добро пожаловать в ядро.<br>
   Подключение необратимо.<br>
@@ -171,33 +292,6 @@ FreeBreath.exe работает на донат-питании.<br>
       </button>
     </p>
 
-    <!-- Телефон -->
-    <p>
-      <strong>Оплата по телефону Желательно Tinkf. Есть Sber и Raif ☎️</strong><br>
-      <code id="phone" style="color: #aaa; background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 3px; user-select: all;">79062484193</code><br>
-      <button id="copyPhoneBtn" class="support-btn" style="width: auto; margin-top: 6px; font-size: 0.95rem; padding: 6px 16px;">
-        → Скопировать номер телефона
-      </button>
-    </p>
-
-    <!-- Имя автора -->
-    <p>
-      <strong>Имя автора 🖋️</strong><br>
-      <code id="authorName" style="color: #aaa; background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 3px; user-select: all;">Artem Petrov</code><br>
-      <button id="copyAuthorBtn" class="support-btn" style="width: auto; margin-top: 6px; font-size: 0.95rem; padding: 6px 16px;">
-        → Скопировать имя автора
-      </button>
-    </p>
-
-    <!-- Telegram -->
-    <p>
-      <a href="https://t.me/cyberpunk_error" target="_blank" class="support-btn" style="width: auto; margin-top: 12px;">
-        → Подписаться на канал
-      </a>
-    </p>
-    <p style="color: #999; font-size: 0.9rem; margin-top: 8px;">
-      Чтобы не пропустить новые КОДЫ и цифровые сны.
-    </p>
   </div>
 </div>
 
@@ -205,7 +299,7 @@ FreeBreath.exe работает на донат-питании.<br>
   Спасибо, что были частью этой истории. Теперь вас нельзя удалить. Только перезаписать.
 </div>
 
-<!-- 🎁 Скрытая кнопка-пасхалка -->
+<!-- 🎁 Скрытая кнопка-пасхалка с глитчем -->
 <a href="secret1384.html" class="easter-btn">
   → Случайно нажми сюда
 </a>
@@ -233,34 +327,6 @@ FreeBreath.exe работает на донат-питании.<br>
       document.getElementById('copyCardBtn').innerText = '✓ Скопировано!';
       setTimeout(() => {
         document.getElementById('copyCardBtn').innerText = '→ Скопировать номер карты';
-      }, 2000);
-    } catch (err) {
-      alert('Не удалось скопировать. Выделите и скопируйте вручную.');
-    }
-  });
-
-  // Копирование номера телефона
-  document.getElementById('copyPhoneBtn').addEventListener('click', async () => {
-    const phone = document.getElementById('phone').innerText;
-    try {
-      await navigator.clipboard.writeText(phone);
-      document.getElementById('copyPhoneBtn').innerText = '✓ Скопировано!';
-      setTimeout(() => {
-        document.getElementById('copyPhoneBtn').innerText = '→ Скопировать номер телефона';
-      }, 2000);
-    } catch (err) {
-      alert('Не удалось скопировать. Выделите и скопируйте вручную.');
-    }
-  });
-
-  // Копирование имени автора
-  document.getElementById('copyAuthorBtn').addEventListener('click', async () => {
-    const name = document.getElementById('authorName').innerText;
-    try {
-      await navigator.clipboard.writeText(name);
-      document.getElementById('copyAuthorBtn').innerText = '✓ Скопировано!';
-      setTimeout(() => {
-        document.getElementById('copyAuthorBtn').innerText = '→ Скопировать имя автора';
       }, 2000);
     } catch (err) {
       alert('Не удалось скопировать. Выделите и скопируйте вручную.');
